@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("./images/Background-seamless-royal-reduced.jpg");
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 16px;
+    font-family: 'Eagle Lake', serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #f7d800;
+    font-family: 'Eagle Lake', serif;
+    font-size: 40px;
+    text-shadow: 2px 2px #3f005c;
+    font-weight: 500;
+}
+
+li {
+    font-size: 24px;
+}
+
+#title-container {
+    background: linear-gradient(to bottom, #6a009b, #4e0072);
+    padding: 30px;
+    border-radius: 0 0 50px 50px;
+    margin-bottom: 40px;
+    border-bottom: 5px double #f7d800;
+    border-left: 5px double #f7d800;
+    border-right: 5px double #f7d800;
+}
+
+#input-container {
+    display: fleX;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#text-input {
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 500px;
+}
+
+#text-input:focus {
+    outline: 2px solid #5189eb;
+}
+
+#text-input[type="text"] {
+    font-size: 18px;
+    font-family: 'Eagle Lake', serif;
+}
+
+#empty-list{
+    color:white;
+    font-style:italic;
+    opacity: 50%;
+    max-width: 30ch;
+    text-align: center;
+    font-family: 'Eagle Lake', serif;
+    text-shadow: 1px 1px black;
+}
+
+#error {
+    color: red;
+    font-style:normal;
+    opacity: 100%;
+    display: none;
+}
+
+.item {
+    color: white;
+}
+
+.item-text {
+    margin-right: 10px;
+    max-width: 30ch;
+    overflow-wrap: break-word;
+}
+
+.btn-remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(214, 46, 46);
+    font-weight: 400;
+    padding: 2px 4px;
+    border-radius: 5px;
+}
+
+.btn-remove:hover {
+    background-color: white;
+    color: red;
+}
+
+#orderedList {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin: 0 0 30px 50px;
+    gap: 20px;
+}
+
+.iconAdd {
+    font-size: 35px;
+    color: #3377ec;
+}
+
+.iconAdd:hover {
+    color: #5189eb;
+    transform: scale(1.1);
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.iconRemove {
+    font-size: 24px;
+    color: #f44336;
+    opacity: 50%;
+    transition: all 0.2s ease-out
+}
+
+.iconRemove:hover {
+    color: #ff5a4e;
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.notChecked {
+    font-size: 24px;
+    color: gray
+}
+
+.notChecked:hover {
+    color: #04AA6D;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.checked {
+    font-size: 24px;
+    color: #04AA6D;
+    cursor: pointer;
+}
