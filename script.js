@@ -42,10 +42,12 @@ function generateList() {
         if (completed.classList.contains("notChecked")) {
             completed.classList.remove("notChecked", "far");
             completed.classList.add("checked", "fas");
+            text.style.textDecoration = "line-through";
         }
         else {
             completed.classList.remove("checked", "fas");
             completed.classList.add("notChecked", "far");
+            text.style.textDecoration = "none";
         }
         save();
     })
@@ -58,6 +60,10 @@ function generateList() {
     input.value = "";
     input.focus();
     save();
+}
+
+function strikeThrough(string) {
+
 }
 
 function removeItem(event) {
@@ -79,7 +85,6 @@ function save() {
         items.push({ text: text.textContent, checked: checked})
     })
     localStorage.setItem("listItems", JSON.stringify(items))
-    console.log("Saved: ", items)
 } 
 
 function retrieveSaved() {
@@ -101,6 +106,5 @@ function retrieveSaved() {
 
 
     }
-    console.log("Retrieved: ", storedItems)
     checkListEmpty();
 }
