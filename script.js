@@ -99,8 +99,10 @@ function retrieveSaved() {
             if (item.checked) {
                 const lastAddedItem = orderedList.lastChild
                 const icon = lastAddedItem.querySelector(".fa-check-circle")
+                const text = lastAddedItem.querySelector(".item-text")
                 icon.classList.remove("notChecked", "far")
                 icon.classList.add("checked", "fas")
+                text.style.textDecoration = "line-through"
             }
         })
 
