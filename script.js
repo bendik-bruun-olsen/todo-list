@@ -4,18 +4,24 @@ const error = document.querySelector("#error");
 const emptyNotifyText = document.querySelector("#empty-list")
 const wrapper = document.querySelector("#wrapper")
 
-const itemList = [];
+let itemList = [];
+const storedList = localStorage.getItem("itemList")
+if (storedList) {
+    itemList = JSON.parse(storedList);
+    console.log("Stored retrieved")
+    generateList();
+};
 
 inputForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (input.value.length > 0) {
-        const newItem = {text: input.value, checked: false}
+        const newItem = {text: input.value, checked: false};
         itemList.unshift(newItem);
         input.value = "";
         generateList();
+        saveList();
     }
     else input.placeholder = "The Field of Input Years for Letters!";
-
 });
 
 function generateList() {
@@ -43,18 +49,17 @@ function generateList() {
         btnRemove.addEventListener("click", () => {
             itemList.splice(i, 1);
             generateList();
+            saveList();
         });
     
         checkedIcon.addEventListener("click", () => {
             e.checked = !e.checked;
             handleCheck(item, e.checked);
-            // save();
+            saveList();
         });
-
-        
-        console.log(itemList.length)
+        handleCheck(item, e.checked);
     });
-    
+
     itemList.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none"
 };
 
@@ -76,21 +81,9 @@ function handleCheck(item, isChecked) {
     };
 };
 
-
-
-// retrieveSaved();
-// save();
-
-// function generateList() {
-//     // generate list items
-
-//     checkListEmpty();
-
-//     emptyNotifyTxt.style.display = "none";
-//     input.value = "";
-//     input.focus();
-//     save();
-// }
+function saveList() {
+    localStorage.setItem("itemList", JSON.stringify(itemList));
+}
 
 
 // function save() {
