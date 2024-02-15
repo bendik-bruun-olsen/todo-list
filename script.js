@@ -1,6 +1,5 @@
 const inputForm = document.querySelector("#input-form");
 const input = document.querySelector("#text-input")
-const error = document.querySelector("#error");
 const emptyNotifyText = document.querySelector("#empty-list")
 const wrapper = document.querySelector("#wrapper")
 
@@ -8,7 +7,6 @@ let itemList = [];
 const storedList = localStorage.getItem("itemList")
 if (storedList) {
     itemList = JSON.parse(storedList);
-    console.log("Stored retrieved")
     generateList();
 };
 
@@ -57,7 +55,8 @@ function generateList() {
             handleCheck(item, e.checked);
             saveList();
         });
-        handleCheck(item, e.checked);
+
+        if (e.checked) handleCheck(item, e.checked);
     });
 
     itemList.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none"
@@ -83,36 +82,4 @@ function handleCheck(item, isChecked) {
 
 function saveList() {
     localStorage.setItem("itemList", JSON.stringify(itemList));
-}
-
-
-// function save() {
-//     // Save list items to localStorage
-//     const items = [];
-//     document.querySelectorAll(".item").forEach(item => { 
-//         const icon = item.querySelector(".fa-check-circle")
-//         const checked = icon.classList.contains("checked") ? 1 : 0
-//         const itemText = item.querySelector(".item-itemText")
-//         items.push({ itemText: itemText.itemTextContent, checked: checked})
-//     })
-//     localStorage.setItem("listItems", JSON.stringify(items))
-// } 
-
-// function retrieveSaved() {
-//     // Retrieve saved list items from localStorage
-//     const storedItems = JSON.parse(localStorage.getItem("listItems"))
-//     if (storedItems) {
-//         storedItems.forEach(item => {
-//             input.value = item.itemText
-//             generateList();
-
-//             if (item.checked) {
-//                 const lastAddedItem = orderedList.lastChild
-//                 handleChecked(lastAddedItem);
-//             }
-//         })
-
-
-//     }
-//     checkListEmpty();
-// }
+};

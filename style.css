@@ -21,6 +21,7 @@ main {
     align-items: center;
 }
 
+/* TEXT */
 h1 {
     color: #f7d800;
     font-family: 'Eagle Lake', serif;
@@ -29,10 +30,23 @@ h1 {
     font-weight: 500;
 }
 
-li {
-    font-size: 16px;
+.item-text {
+    margin-right: 10px;
+    max-width: 30ch;
+    overflow-wrap: break-word;
 }
 
+#empty-list{
+    color:white;
+    font-style:italic;
+    opacity: 50%;
+    max-width: 30ch;
+    text-align: center;
+    font-family: 'Eagle Lake', serif;
+    text-shadow: 1px 1px black;
+}
+
+/* CONTAINERS */
 #title-container {
     background: linear-gradient(to bottom, #6a009b, #4e0072);
     padding: 30px;
@@ -50,6 +64,16 @@ li {
     margin-bottom: 30px;
 }
 
+#wrapper {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin: 0 0 30px 50px;
+    gap: 20px;
+}
+
 .item-container {
     display: flex;
     align-items: center;
@@ -62,6 +86,17 @@ li {
     width: 500px;
 }
 
+/* INPUT */
+#input-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#text-input {
+    padding-right: 40px;
+}
+
 #text-input:focus {
     outline: 2px solid #5189eb;
 }
@@ -71,27 +106,10 @@ li {
     font-family: 'Eagle Lake', serif;
 }
 
-#empty-list{
-    color:white;
-    font-style:italic;
-    opacity: 50%;
-    max-width: 30ch;
-    text-align: center;
-    font-family: 'Eagle Lake', serif;
-    text-shadow: 1px 1px black;
-}
-
-#error {
-    color: red;
-    font-style:normal;
-    opacity: 100%;
-    display: none;
-}
-
-.item-text {
-    margin-right: 10px;
-    max-width: 30ch;
-    overflow-wrap: break-word;
+/* BUTTONS */
+#add-btn {
+    background-color: transparent;
+    border: none;
 }
 
 .btn-remove {
@@ -110,25 +128,18 @@ li {
     color: red;
 }
 
-#wrapper {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-    margin: 0 0 30px 50px;
-    gap: 20px;
-}
-
+/* ICONS */
 .iconAdd {
+    position: absolute;
     font-size: 35px;
     color: #3377ec;
+    right: 5px;
+
 }
 
 .iconAdd:hover {
-    color: #5189eb;
-    transform: scale(1.1);
-    transition: all 0.3s ease-out;
+    transform: scale(1.05);
+    transition: all 0.1s ease-out;
     cursor: pointer;
 }
 
