@@ -1,112 +1,105 @@
-const input = document.querySelector("#text-input");
+const inputForm = document.querySelector("#input-form");
+const input = document.querySelector("#text-input")
 const error = document.querySelector("#error");
-const emptyTxt = document.querySelector("#empty-list")
-const orderedList = document.querySelector("#orderedList")
-let currentItems = document.querySelectorAll(".item")
+const emptyNotifyTxt = document.querySelector("#empty-list")
+const wrapper = document.querySelector("#wrapper")
 
-document.getElementById("addToList").addEventListener("click", function() {
-    input.value.length > 0 ? generateList() : input.placeholder = "Ye Field of Input Yearns for Letters!"
+inputForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    input.value.length > 0 ? createItem(input.value, false) : input.placeholder = "Ye Field of Input Yearns for Letters!";
 });
-const checkListEmpty = () => {
-    currentItems = document.querySelectorAll(".item");
-    emptyTxt.style.display = currentItems.length > 0 ? "none" : "block";
-}
 
-retrieveSaved();
-save();
+function createItem(text, checked) {
 
-function generateList() {
-    // generate list items
+    const item = document.createElement("div");
+    const iconContainer = document.createElement("div")
 
-    checkListEmpty();
-    
-    const newItem = document.createElement("li");
-    newItem.classList.add("item");
-
-    const newItemContainer = document.createElement("div");
-    newItemContainer.classList.add("item-container") 
-
-    const text = document.createElement("p");
-    text.textContent = input.value;
-    text.classList.add("item-text");
-
+    const itemText = document.createElement("p");
     const btnRemove = document.createElement("i");
+    const checkedIcon = document.createElement("i");
+
+    item.classList.add("item-container");
+    itemText.classList.add("item-itemText");
     btnRemove.classList.add("fas", "fa-minus-circle", "icon", "iconRemove");
-    btnRemove.addEventListener("click", function(event) {
-        removeItem(event);
+    checkedIcon.classList.add("far", "fa-check-circle", "notChecked");
+
+    itemText.textContent = text;
+
+    btnRemove.addEventListener("click", () => {
+        item.remove();
     });
 
-    const completed = document.createElement("i");
-    completed.classList.add("far", "fa-check-circle", "notChecked")
-    completed.addEventListener("click", function() {
-        if (completed.classList.contains("notChecked")) {
-            completed.classList.remove("notChecked", "far");
-            completed.classList.add("checked", "fas");
-            text.style.textDecoration = "line-through";
-        }
-        else {
-            completed.classList.remove("checked", "fas");
-            completed.classList.add("notChecked", "far");
-            text.style.textDecoration = "none";
-        }
-        save();
+    checkedIcon.addEventListener("click", () => {
+        handleChecked(item, checked);
+        // save();
     })
 
-    newItemContainer.append(text, completed, btnRemove);
-    newItem.append(newItemContainer);
-    orderedList.append(newItem);
+    iconContainer.append(checkedIcon, btnRemove)
+    item.append(itemText, iconContainer);
+    wrapper.append(item);
+};
 
-    emptyTxt.style.display = "none";
-    input.value = "";
-    input.focus();
-    save();
-}
+function handleChecked(item, checked) {
+    const icon = item.querySelector(".fa-check-circle");
+    const itemText = item.querySelector(".item-itemText");
 
-function strikeThrough(string) {
-
-}
-
-function removeItem(event) {
-    // Remove list items
-
-    event.target.closest("li").remove();
-    checkListEmpty();
-    save();
-}
-
-function save() {
-    // Save list items to localStorage
-
-    const items = [];
-    document.querySelectorAll(".item").forEach(item => { 
-        const icon = item.querySelector(".fa-check-circle")
-        const checked = icon.classList.contains("checked") ? 1 : 0
-        const text = item.querySelector(".item-text")
-        items.push({ text: text.textContent, checked: checked})
-    })
-    localStorage.setItem("listItems", JSON.stringify(items))
-} 
-
-function retrieveSaved() {
-    // Retrieve saved list items from localStorage
-
-    const storedItems = JSON.parse(localStorage.getItem("listItems"))
-    if (storedItems) {
-        storedItems.forEach(item => {
-            input.value = item.text
-            generateList();
-
-            if (item.checked) {
-                const lastAddedItem = orderedList.lastChild
-                const icon = lastAddedItem.querySelector(".fa-check-circle")
-                const text = lastAddedItem.querySelector(".item-text")
-                icon.classList.remove("notChecked", "far")
-                icon.classList.add("checked", "fas")
-                text.style.textDecoration = "line-through"
-            }
-        })
-
-
+    if (checked) {
+        icon.classList.remove("notChecked", "far");
+        icon.classList.add("checked", "fas");
+        itemText.style.itemTextDecoration = "line-through";
+        item.style.opacity = "50%"
     }
-    checkListEmpty();
-}
+    else {
+        icon.classList.remove("checked", "fas");
+        icon.classList.add("notChecked", "far");
+        itemText.style.itemTextDecoration = "none";
+        item.style.opacity = "100%";
+    };
+};
+
+
+// retrieveSaved();
+// save();
+
+// function generateList() {
+//     // generate list items
+
+//     checkListEmpty();
+
+//     emptyNotifyTxt.style.display = "none";
+//     input.value = "";
+//     input.focus();
+//     save();
+// }
+
+
+// function save() {
+//     // Save list items to localStorage
+//     const items = [];
+//     document.querySelectorAll(".item").forEach(item => { 
+//         const icon = item.querySelector(".fa-check-circle")
+//         const checked = icon.classList.contains("checked") ? 1 : 0
+//         const itemText = item.querySelector(".item-itemText")
+//         items.push({ itemText: itemText.itemTextContent, checked: checked})
+//     })
+//     localStorage.setItem("listItems", JSON.stringify(items))
+// } 
+
+// function retrieveSaved() {
+//     // Retrieve saved list items from localStorage
+//     const storedItems = JSON.parse(localStorage.getItem("listItems"))
+//     if (storedItems) {
+//         storedItems.forEach(item => {
+//             input.value = item.itemText
+//             generateList();
+
+//             if (item.checked) {
+//                 const lastAddedItem = orderedList.lastChild
+//                 handleChecked(lastAddedItem);
+//             }
+//         })
+
+
+//     }
+//     checkListEmpty();
+// }

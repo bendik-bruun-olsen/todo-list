@@ -30,7 +30,7 @@ h1 {
 }
 
 li {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 #title-container {
@@ -88,10 +88,6 @@ li {
     display: none;
 }
 
-.item {
-    color: white;
-}
-
 .item-text {
     margin-right: 10px;
     max-width: 30ch;
@@ -114,7 +110,7 @@ li {
     color: red;
 }
 
-#orderedList {
+#wrapper {
     color: white;
     display: flex;
     flex-direction: column;
