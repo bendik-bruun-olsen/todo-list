@@ -6,16 +6,26 @@
 
 body {
     background-image: url("./images/Background-seamless-royal-reduced.jpg");
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     font-size: 16px;
     font-family: 'Eagle Lake', serif;
 }
 
+header {
+    width: fit-content;
+}
+
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 680px;
+    width: 100%;
+}
+
+#gradient-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.842), transparent);
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,6 +44,7 @@ h1 {
     margin-right: 10px;
     max-width: 30ch;
     overflow-wrap: break-word;
+    color: black;
 }
 
 #empty-list{
@@ -57,27 +68,22 @@ h1 {
     border-right: 5px double #f7d800;
 }
 
-#input-container {
-    display: fleX;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
 #wrapper {
-    color: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-    margin: 0 0 30px 50px;
-    gap: 20px;
+    width: 70%;
 }
 
 .item-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    padding: 10px 10px;
+    margin: 10px 0;
+    background-color: #fffef0;
+    box-shadow: inset 0 0 10px 5px #c7a984;
+    border-radius: 5px;
+    transform: all 0.3 ease-out;
+    
 }
 
 #text-input {
@@ -91,10 +97,13 @@ h1 {
     display: flex;
     align-items: center;
     position: relative;
+    margin-bottom: 20px;
+    width: 80%;
 }
 
 #text-input {
     padding-right: 40px;
+    width: 100%;
 }
 
 #text-input:focus {
@@ -110,6 +119,10 @@ h1 {
 #add-btn {
     background-color: transparent;
     border: none;
+    position: absolute;
+    font-size: 35px;
+    color: #3377ec;
+    right: 5px;
 }
 
 .btn-remove {
@@ -129,14 +142,6 @@ h1 {
 }
 
 /* ICONS */
-.iconAdd {
-    position: absolute;
-    font-size: 35px;
-    color: #3377ec;
-    right: 5px;
-
-}
-
 .iconAdd:hover {
     transform: scale(1.05);
     transition: all 0.1s ease-out;

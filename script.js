@@ -7,7 +7,7 @@ let itemList = [];
 const storedList = localStorage.getItem("itemList")
 if (storedList) {
     itemList = JSON.parse(storedList);
-    generateList();
+    generateList(itemList);
 };
 
 inputForm.addEventListener("submit", (e) => {
@@ -16,17 +16,17 @@ inputForm.addEventListener("submit", (e) => {
         const newItem = {text: input.value, checked: false};
         itemList.unshift(newItem);
         input.value = "";
-        generateList();
+        generateList(itemList);
         saveList();
     }
     else input.placeholder = "The Field of Input Years for Letters!";
 });
 
-function generateList() {
+function generateList(arr) {
     const previousItems = document.querySelectorAll(".item-container")
     previousItems.forEach(e => e.remove());
 
-    itemList.forEach((e, i) => {
+    arr.forEach((e, i) => {
         const item = document.createElement("div");
         const iconContainer = document.createElement("div");
         const itemText = document.createElement("p");
@@ -46,7 +46,7 @@ function generateList() {
 
         btnRemove.addEventListener("click", () => {
             itemList.splice(i, 1);
-            generateList();
+            generateList(itemList);
             saveList();
         });
     
@@ -70,7 +70,7 @@ function handleCheck(item, isChecked) {
         icon.classList.remove("notChecked", "far");
         icon.classList.add("checked", "fas");
         itemText.style.textDecoration = "line-through";
-        item.style.opacity = "50%"
+        item.style.opacity = "25%"
     }
     else {
         icon.classList.remove("checked", "fas");
@@ -83,3 +83,5 @@ function handleCheck(item, isChecked) {
 function saveList() {
     localStorage.setItem("itemList", JSON.stringify(itemList));
 };
+
+// function hideChecked
