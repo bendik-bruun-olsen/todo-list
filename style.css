@@ -45,7 +45,8 @@ h1 {
 }
 
 .item-text {
-    margin-right: 10px;
+    display: flex;
+    align-items: center;
     max-width: 30ch;
     overflow-wrap: break-word;
     color: black;
@@ -60,7 +61,7 @@ h1 {
     font-family: 'Eagle Lake', serif;
 }
 
-#hide-completed-label {
+.options-labels {
     font-size: 14px;
     user-select: none;
     cursor: pointer;
@@ -75,6 +76,10 @@ h1 {
     border-bottom: 5px double #f7d800;
     border-left: 5px double #f7d800;
     border-right: 5px double #f7d800;
+}
+
+#options {
+    margin-bottom: 15px;
 }
 
 #wrapper {
@@ -101,6 +106,7 @@ h1 {
     display: flex;
     gap: 5px;
     height: 100%;
+    padding-bottom: 5px;
 }
 
 .arrows-container {
@@ -131,9 +137,13 @@ h1 {
 }
 
 /* CHECKBOX */
+#show-num {
+    cursor: pointer;
+    margin-right: 20px;
+}
+
 #hide-completed {
     cursor: pointer;
-    margin-bottom: 15px;
 }
 
 /* BUTTONS */
@@ -156,6 +166,7 @@ h1 {
     font-size: 24px;
     color: #f44336;
     opacity: 50%;
+    padding-top: 3px;
 }
 
 .remove-btn:hover {
@@ -168,7 +179,8 @@ h1 {
 
 .notChecked {
     font-size: 24px;
-    color: gray
+    color: gray;
+    padding-top: 3px;
 }
 
 .notChecked:hover {
@@ -182,6 +194,7 @@ h1 {
     font-size: 24px;
     color: #04AA6D;
     cursor: pointer;
+    padding-top: 3px;
 }
 
 .checked:hover {
@@ -192,8 +205,20 @@ h1 {
 
 .arrow-up {
     font-size: 16px;
+    opacity: 25%;
+}
+
+.arrow-up:hover {
+    opacity: 100%;
+    cursor: pointer;
 }
 
 .arrow-down {
     font-size:16px;
+    opacity: 25%;
+}
+
+.arrow-down:hover {
+    opacity: 100%;
+    cursor: pointer;
 }

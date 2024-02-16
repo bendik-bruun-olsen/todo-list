@@ -3,11 +3,12 @@ const input = document.querySelector("#text-input");
 const emptyNotifyText = document.querySelector("#empty-list");
 const wrapper = document.querySelector("#wrapper");
 const hideCompleted = document.querySelector("#hide-completed");
+const showNumbers = document.querySelector("#show-num")
 
-let itemList = [];
-const storedList = localStorage.getItem("itemList")
+let originalList = [];
+const storedList = localStorage.getItem("originalList")
 if (storedList) {
-    itemList = JSON.parse(storedList);
+    originalList = JSON.parse(storedList);
     generateList(sortList());
 };
 
@@ -15,13 +16,17 @@ inputForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (input.value.length > 0) {
         const newItem = {text: input.value, checked: false};
-        itemList.unshift(newItem);
+        originalList.unshift(newItem);
         input.value = "";
         generateList(sortList());
         saveList();
     }
     else input.placeholder = "The Field of Input Yearns for Letters!";
 });
+
+showNumbers.addEventListener("change", () => {
+    generateList(sortList());
+})
 
 hideCompleted.addEventListener("change", () => {
     generateList(sortList());
@@ -50,7 +55,8 @@ function generateList(arr) {
         arrowUp.classList.add("fas", "fa-caret-up", "arrow-up");
         arrowDown.classList.add("fas", "fa-caret-down", "arrow-down");
 
-        itemText.textContent = e.text;
+        // itemText.textContent = e.text;
+        itemText.textContent = showNumbers.checked ? `${i+1}. ${e.text}` : e.text;
 
         arrowsContainer.append(arrowUp, arrowDown)
         iconContainer.append(checkedIcon, btnRemove, arrowsContainer);
@@ -58,7 +64,7 @@ function generateList(arr) {
         wrapper.append(item);
 
         btnRemove.addEventListener("click", () => {
-            itemList.splice(i, 1);
+            originalList.splice(i, 1);
             generateList(sortList());
             saveList();
         });
@@ -97,13 +103,11 @@ function handleCheck(item, isChecked) {
 };
 
 function sortList() {
-    if (hideCompleted.checked) {
-        const newList = itemList.filter(e => !e.checked)
-        return newList
-    }
-    else return itemList;
-}
+    let modifiedList = [...originalList];
+    if (hideCompleted.checked) modifiedList = modifiedList.filter(e => !e.checked);
+    return modifiedList
+};
 
 function saveList() {
-    localStorage.setItem("itemList", JSON.stringify(itemList));
+    localStorage.setItem("originalList", JSON.stringify(originalList));
 };
