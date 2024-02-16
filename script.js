@@ -1,7 +1,8 @@
 const inputForm = document.querySelector("#input-form");
-const input = document.querySelector("#text-input")
-const emptyNotifyText = document.querySelector("#empty-list")
-const wrapper = document.querySelector("#wrapper")
+const input = document.querySelector("#text-input");
+const emptyNotifyText = document.querySelector("#empty-list");
+const wrapper = document.querySelector("#wrapper");
+const hideCompleted = document.querySelector("#hide-completed");
 
 let itemList = [];
 const storedList = localStorage.getItem("itemList")
@@ -22,6 +23,14 @@ inputForm.addEventListener("submit", (e) => {
     else input.placeholder = "The Field of Input Years for Letters!";
 });
 
+hideCompleted.addEventListener("change", () => {
+    if (hideCompleted.checked) {
+        const newList = itemList.filter(e => !e.checked)
+        generateList(newList)
+    }
+    else generateList(itemList);
+});
+
 function generateList(arr) {
     const previousItems = document.querySelectorAll(".item-container")
     previousItems.forEach(e => e.remove());
@@ -35,6 +44,7 @@ function generateList(arr) {
 
         item.classList.add("item-container");
         itemText.classList.add("item-text");
+        iconContainer.classList.add("icon-container");
         btnRemove.classList.add("fas", "fa-minus-circle", "icon", "iconRemove");
         checkedIcon.classList.add("far", "fa-check-circle", "notChecked");
 
@@ -57,6 +67,8 @@ function generateList(arr) {
         });
 
         if (e.checked) handleCheck(item, e.checked);
+        if (i < arr.length - 1) item.style.borderBottom = "1px solid gray"; 
+        input.focus();
     });
 
     itemList.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none"
@@ -70,13 +82,13 @@ function handleCheck(item, isChecked) {
         icon.classList.remove("notChecked", "far");
         icon.classList.add("checked", "fas");
         itemText.style.textDecoration = "line-through";
-        item.style.opacity = "25%"
+        itemText.style.opacity = "25%"
     }
     else {
         icon.classList.remove("checked", "fas");
         icon.classList.add("notChecked", "far");
         itemText.style.textDecoration = "none";
-        item.style.opacity = "100%";
+        itemText.style.opacity = "100%";
     };
 };
 

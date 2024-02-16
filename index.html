@@ -21,9 +21,13 @@
         </header>
         <main>
             <form id="input-form">
-                <input type="text" id="text-input" autofocus>
+                <input type="text" id="text-input" autofocus autocomplete="off">
                 <button type="submit" id="add-btn" class="fas fa-plus-circle iconAdd"></button>
             </form>
+            <div id="check-container">
+                <label for="hide-completed" id="hide-completed-label">Hide Completed</label>
+                <input type="checkbox" id="hide-completed">
+            </div>
             <p id="empty-list">Behold! The ledger of quests stands empty. Scribeth thy tasks, for adventure awaits!</p>
             <div id="wrapper">
             </div>

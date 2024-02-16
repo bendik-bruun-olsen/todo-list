@@ -19,7 +19,10 @@ main {
     flex-direction: column;
     align-items: center;
     max-width: 680px;
-    width: 100%;
+    background-color: #fffef0;
+    box-shadow: inset 0 0 10px 5px #c7a984;
+    padding: 10px 10px;
+    border-radius: 10px;
 }
 
 #gradient-overlay {
@@ -48,13 +51,17 @@ h1 {
 }
 
 #empty-list{
-    color:white;
+    color:rgb(70, 70, 70);
     font-style:italic;
-    opacity: 50%;
+    opacity: 75%;
     max-width: 30ch;
     text-align: center;
     font-family: 'Eagle Lake', serif;
-    text-shadow: 1px 1px black;
+}
+
+#hide-completed-label {
+    font-size: 14px;
+    user-select: none;
 }
 
 /* CONTAINERS */
@@ -71,7 +78,8 @@ h1 {
 #wrapper {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
+    border-radius: 5px;
 }
 
 .item-container {
@@ -79,11 +87,6 @@ h1 {
     justify-content: space-between;
     padding: 10px 10px;
     margin: 10px 0;
-    background-color: #fffef0;
-    box-shadow: inset 0 0 10px 5px #c7a984;
-    border-radius: 5px;
-    transform: all 0.3 ease-out;
-    
 }
 
 #text-input {
@@ -92,18 +95,21 @@ h1 {
     width: 500px;
 }
 
+.icon-container {
+    display: flex;
+    gap: 5px;
+}
+
 /* INPUT */
 #input-form {
     display: flex;
     align-items: center;
     position: relative;
-    margin-bottom: 20px;
-    width: 80%;
+    margin-bottom: 5px;
 }
 
 #text-input {
     padding-right: 40px;
-    width: 100%;
 }
 
 #text-input:focus {
@@ -169,11 +175,14 @@ h1 {
 .notChecked:hover {
     color: #04AA6D;
     cursor: pointer;
-    transition: all 0.2s ease-out;
 }
 
 .checked {
     font-size: 24px;
     color: #04AA6D;
     cursor: pointer;
+}
+
+.checked:hover {
+    color: gray;
 }
