@@ -8,7 +8,7 @@ let itemList = [];
 const storedList = localStorage.getItem("itemList")
 if (storedList) {
     itemList = JSON.parse(storedList);
-    generateList(itemList);
+    generateList(sortList());
 };
 
 inputForm.addEventListener("submit", (e) => {
@@ -17,18 +17,14 @@ inputForm.addEventListener("submit", (e) => {
         const newItem = {text: input.value, checked: false};
         itemList.unshift(newItem);
         input.value = "";
-        generateList(itemList);
+        generateList(sortList());
         saveList();
     }
-    else input.placeholder = "The Field of Input Years for Letters!";
+    else input.placeholder = "The Field of Input Yearns for Letters!";
 });
 
 hideCompleted.addEventListener("change", () => {
-    if (hideCompleted.checked) {
-        const newList = itemList.filter(e => !e.checked)
-        generateList(newList)
-    }
-    else generateList(itemList);
+    generateList(sortList());
 });
 
 function generateList(arr) {
@@ -56,22 +52,23 @@ function generateList(arr) {
 
         btnRemove.addEventListener("click", () => {
             itemList.splice(i, 1);
-            generateList(itemList);
+            generateList(sortList());
             saveList();
         });
     
         checkedIcon.addEventListener("click", () => {
             e.checked = !e.checked;
             handleCheck(item, e.checked);
+            generateList(sortList());
             saveList();
         });
 
         if (e.checked) handleCheck(item, e.checked);
         if (i < arr.length - 1) item.style.borderBottom = "1px solid gray"; 
-        input.focus();
+ 
     });
-
-    itemList.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none"
+    input.focus();
+    arr.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none"
 };
 
 function handleCheck(item, isChecked) {
@@ -92,8 +89,14 @@ function handleCheck(item, isChecked) {
     };
 };
 
+function sortList() {
+    if (hideCompleted.checked) {
+        const newList = itemList.filter(e => !e.checked)
+        return newList
+    }
+    else return itemList;
+}
+
 function saveList() {
     localStorage.setItem("itemList", JSON.stringify(itemList));
 };
-
-// function hideChecked

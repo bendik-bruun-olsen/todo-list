@@ -21,7 +21,7 @@ main {
     max-width: 680px;
     background-color: #fffef0;
     box-shadow: inset 0 0 10px 5px #c7a984;
-    padding: 10px 10px;
+    padding: 20px 20px;
     border-radius: 10px;
 }
 
@@ -63,6 +63,7 @@ h1 {
 #hide-completed-label {
     font-size: 14px;
     user-select: none;
+    cursor: pointer;
 }
 
 /* CONTAINERS */
@@ -120,6 +121,12 @@ h1 {
 #text-input[type="text"] {
     font-size: 18px;
     font-family: 'Eagle Lake', serif;
+}
+
+/* CHECKBOX */
+#hide-completed {
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 /* BUTTONS */
