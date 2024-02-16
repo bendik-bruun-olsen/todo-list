@@ -100,6 +100,13 @@ h1 {
 .icon-container {
     display: flex;
     gap: 5px;
+    height: 100%;
+}
+
+.arrows-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
 }
 
 /* INPUT */
@@ -139,40 +146,24 @@ h1 {
     right: 5px;
 }
 
-.btn-remove {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: rgb(214, 46, 46);
-    font-weight: 400;
-    padding: 2px 4px;
-    border-radius: 5px;
-}
-
-.btn-remove:hover {
-    background-color: white;
-    color: red;
-}
-
-/* ICONS */
-.iconAdd:hover {
+#add-btn:hover {
     transform: scale(1.05);
     transition: all 0.1s ease-out;
     cursor: pointer;
 }
 
-.iconRemove {
+.remove-btn {
     font-size: 24px;
     color: #f44336;
     opacity: 50%;
-    transition: all 0.2s ease-out
 }
 
-.iconRemove:hover {
+.remove-btn:hover {
     color: #ff5a4e;
     opacity: 100%;
     cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-out
 }
 
 .notChecked {
@@ -183,6 +174,8 @@ h1 {
 .notChecked:hover {
     color: #04AA6D;
     cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-out
 }
 
 .checked {
@@ -193,4 +186,14 @@ h1 {
 
 .checked:hover {
     color: gray;
+    transform: scale(1.05);
+    transition: all 0.2s ease-out
+}
+
+.arrow-up {
+    font-size: 16px;
+}
+
+.arrow-down {
+    font-size:16px;
 }

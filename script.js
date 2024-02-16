@@ -34,19 +34,26 @@ function generateList(arr) {
     arr.forEach((e, i) => {
         const item = document.createElement("div");
         const iconContainer = document.createElement("div");
+        const arrowsContainer = document.createElement("div")
         const itemText = document.createElement("p");
         const btnRemove = document.createElement("i");
         const checkedIcon = document.createElement("i");
+        const arrowUp = document.createElement("i");
+        const arrowDown = document.createElement("i");
 
         item.classList.add("item-container");
         itemText.classList.add("item-text");
         iconContainer.classList.add("icon-container");
-        btnRemove.classList.add("fas", "fa-minus-circle", "icon", "iconRemove");
+        arrowsContainer.classList.add("arrows-container");
+        btnRemove.classList.add("fas", "fa-minus-circle", "remove-btn");
         checkedIcon.classList.add("far", "fa-check-circle", "notChecked");
+        arrowUp.classList.add("fas", "fa-caret-up", "arrow-up");
+        arrowDown.classList.add("fas", "fa-caret-down", "arrow-down");
 
         itemText.textContent = e.text;
 
-        iconContainer.append(checkedIcon, btnRemove);
+        arrowsContainer.append(arrowUp, arrowDown)
+        iconContainer.append(checkedIcon, btnRemove, arrowsContainer);
         item.append(itemText, iconContainer);
         wrapper.append(item);
 
