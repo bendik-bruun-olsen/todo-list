@@ -41,6 +41,7 @@ h1 {
     font-size: 40px;
     text-shadow: 2px 2px #3f005c;
     font-weight: 500;
+    user-select: none;
 }
 
 .item-text {
@@ -85,7 +86,7 @@ h1 {
 .item-container {
     display: flex;
     justify-content: space-between;
-    padding: 10px 10px;
+    padding: 10px 10px 0 10px;;
     margin: 10px 0;
 }
 
