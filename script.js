@@ -5,6 +5,8 @@ const wrapper = document.querySelector("#wrapper");
 const hideCompleted = document.querySelector("#hide-completed");
 const showNumbers = document.querySelector("#show-num")
 
+const generateID = () => Math.round(Math.random() * Date.now()).toString(16);
+
 let originalList = [];
 const storedList = localStorage.getItem("originalList")
 if (storedList) {
@@ -15,11 +17,17 @@ if (storedList) {
 inputForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (input.value.length > 0) {
-        const newItem = {text: input.value, checked: false};
+        const newItem = {
+            id: generateID(),
+            text: input.value, 
+            checked: false
+        };
+
         originalList.unshift(newItem);
         input.value = "";
         generateList(sortList());
         saveList();
+        input.focus();
     }
     else input.placeholder = "The Field of Input Yearns for Letters!";
 });
@@ -37,6 +45,7 @@ function generateList(arr) {
     previousItems.forEach(e => e.remove());
 
     arr.forEach((e, i) => {
+
         const item = document.createElement("div");
         const iconContainer = document.createElement("div");
         const arrowsContainer = document.createElement("div")
@@ -55,7 +64,6 @@ function generateList(arr) {
         arrowUp.classList.add("fas", "fa-caret-up", "arrow-up");
         arrowDown.classList.add("fas", "fa-caret-down", "arrow-down");
 
-        // itemText.textContent = e.text;
         itemText.textContent = showNumbers.checked ? `${i+1}. ${e.text}` : e.text;
 
         arrowsContainer.append(arrowUp, arrowDown)
@@ -76,12 +84,14 @@ function generateList(arr) {
             saveList();
         });
 
+        arrowUp.addEventListener("click", () => generateList(sortList(e.id, "moveUp")));
+        arrowDown.addEventListener("click", () => generateList(sortList(e.id, "moveDown")));
+
         if (e.checked) handleCheck(item, e.checked);
         if (i < arr.length - 1) item.style.borderBottom = "1px solid gray"; 
  
     });
-    input.focus();
-    arr.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none"
+    arr.length === 0 ? emptyNotifyText.style.display = "block" : emptyNotifyText.style.display = "none";
 };
 
 function handleCheck(item, isChecked) {
@@ -102,11 +112,57 @@ function handleCheck(item, isChecked) {
     };
 };
 
-function sortList() {
+function sortList(id, movement) {
+    if (movement) {
+        let i = originalList.findIndex(e => e.id === id);
+
+        if (!hideCompleted.checked) {
+            // Move items in originalList
+            if (movement === "moveUp" && i > 0) {
+                moveItemUp(i);
+            }
+            else if (movement === "moveDown" && i < originalList.length - 1) {
+                moveItemDown(i);
+            };
+        }
+        else {
+            // Move items in originalList when modifiedList is displayed/rendered.
+            if (movement === "moveUp" && i > 0) {
+                while (originalList[i-1].checked && i > 0) {
+                    moveItemUp(i);
+                    i--;
+                };
+                if (i > 0) moveItemUp(i);
+            }
+            else if (movement === "moveDown" && i < originalList.length - 1) {
+                while (originalList[i+1].checked && i < originalList.length - 1) {
+                    moveItemDown(i);
+                    i++;
+                };
+                if (i < originalList.length - 1) moveItemDown(i);
+            };
+        };
+    };
+    saveList();
+
     let modifiedList = [...originalList];
-    if (hideCompleted.checked) modifiedList = modifiedList.filter(e => !e.checked);
-    return modifiedList
+    modifiedList = modifiedList.filter(e => !e.checked);
+
+    return hideCompleted.checked ? modifiedList : originalList;
 };
+
+function moveItemUp(i) {
+    const temp = originalList[i];
+    originalList[i] = originalList[i-1];
+    originalList[i-1] = temp;
+}
+
+function moveItemDown(i) {
+    const temp = originalList[i];
+    originalList[i] = originalList[i+1];
+    originalList[i+1] = temp;
+}
+
 
 function saveList() {
     localStorage.setItem("originalList", JSON.stringify(originalList));

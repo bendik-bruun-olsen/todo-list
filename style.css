@@ -211,6 +211,8 @@ h1 {
 .arrow-up:hover {
     opacity: 100%;
     cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-out;
 }
 
 .arrow-down {
@@ -221,4 +223,6 @@ h1 {
 .arrow-down:hover {
     opacity: 100%;
     cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-out;
 }
