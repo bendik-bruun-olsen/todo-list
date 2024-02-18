@@ -7,6 +7,8 @@ const showNumbers = document.querySelector("#show-num")
 
 const generateID = () => Math.round(Math.random() * Date.now()).toString(16);
 
+// localStorage.removeItem("originalList")
+
 let originalList = [];
 const storedList = localStorage.getItem("originalList")
 if (storedList) {
@@ -125,28 +127,25 @@ function sortList(id, movement) {
         else {
             // Move items in originalList when modifiedList is displayed/rendered.
             if (movement === "moveUp" && i > 0) {
-                while (originalList[i-1].checked && i > 0) {
+                while (originalList[i-1].checked && i > 0) { // Move past the checked(thus hidden) items.
                     moveItemUp(i);
                     i--;
-                    if (i = 0) break;
+                    if (i === 0) break; // Break to avoid checking "originalList[i-1].checked" if i is 0, which will return undefined.
                 };
-                moveItemUp(i);
+                if (i > 0) moveItemUp(i);
             }
             else if (movement === "moveDown" && i < originalList.length - 1) {
                 while (originalList[i+1].checked && i < originalList.length - 1) {
                     moveItemDown(i);
                     i++;
-                    if (i = originalList.length - 1) break;
+                    if (i === originalList.length - 1) break;
                 };
                 if (i < originalList.length - 1) moveItemDown(i);
             };
         };
     };
     saveList();
-
-    let modifiedList = [...originalList];
-    modifiedList = modifiedList.filter(e => !e.checked);
-
+    let modifiedList = originalList.filter(e => hideCompleted.checked ? !e.checked : e);
     return hideCompleted.checked ? modifiedList : originalList;
 };
 
@@ -154,13 +153,13 @@ function moveItemUp(i) {
     const temp = originalList[i];
     originalList[i] = originalList[i-1];
     originalList[i-1] = temp;
-}
+};
 
 function moveItemDown(i) {
     const temp = originalList[i];
     originalList[i] = originalList[i+1];
     originalList[i+1] = temp;
-}
+};
 
 
 function saveList() {
