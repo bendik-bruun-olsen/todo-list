@@ -118,12 +118,9 @@ function sortList(id, movement) {
 
         if (!hideCompleted.checked) {
             // Move items in originalList
-            if (movement === "moveUp" && i > 0) {
-                moveItemUp(i);
-            }
-            else if (movement === "moveDown" && i < originalList.length - 1) {
-                moveItemDown(i);
-            };
+            if (movement === "moveUp" && i > 0) moveItemUp(i);
+            else if (movement === "moveDown" && i < originalList.length - 1) moveItemDown(i);
+
         }
         else {
             // Move items in originalList when modifiedList is displayed/rendered.
@@ -131,13 +128,15 @@ function sortList(id, movement) {
                 while (originalList[i-1].checked && i > 0) {
                     moveItemUp(i);
                     i--;
+                    if (i = 0) break;
                 };
-                if (i > 0) moveItemUp(i);
+                moveItemUp(i);
             }
             else if (movement === "moveDown" && i < originalList.length - 1) {
                 while (originalList[i+1].checked && i < originalList.length - 1) {
                     moveItemDown(i);
                     i++;
+                    if (i = originalList.length - 1) break;
                 };
                 if (i < originalList.length - 1) moveItemDown(i);
             };

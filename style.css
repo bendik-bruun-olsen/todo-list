@@ -174,7 +174,7 @@ h1 {
     opacity: 100%;
     cursor: pointer;
     transform: scale(1.05);
-    transition: all 0.2s ease-out
+    transition: all 0.1s ease-out
 }
 
 .notChecked {
@@ -187,7 +187,7 @@ h1 {
     color: #04AA6D;
     cursor: pointer;
     transform: scale(1.05);
-    transition: all 0.2s ease-out
+    transition: all 0.1s ease-out
 }
 
 .checked {
@@ -200,7 +200,7 @@ h1 {
 .checked:hover {
     color: gray;
     transform: scale(1.05);
-    transition: all 0.2s ease-out
+    transition: all 0.1s ease-out
 }
 
 .arrow-up {
@@ -211,8 +211,8 @@ h1 {
 .arrow-up:hover {
     opacity: 100%;
     cursor: pointer;
-    transform: scale(1.05);
-    transition: all 0.2s ease-out;
+    transform: scale(1.2);
+    transition: all 0.1s ease-out;
 }
 
 .arrow-down {
@@ -223,6 +223,6 @@ h1 {
 .arrow-down:hover {
     opacity: 100%;
     cursor: pointer;
-    transform: scale(1.05);
-    transition: all 0.2s ease-out;
+    transform: scale(1.2);
+    transition: all 0.1s ease-out;
 }
