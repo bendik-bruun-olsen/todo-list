@@ -7,7 +7,9 @@ const showNumbers = document.querySelector("#show-num")
 
 const generateID = () => Math.round(Math.random() * Date.now()).toString(16);
 
-// localStorage.removeItem("originalList")
+hideCompleted.checked = localStorage.getItem("hideCompleted") === "true";
+showNumbers.checked = localStorage.getItem("showNumbers") === "true";
+
 
 let originalList = [];
 const storedList = localStorage.getItem("originalList")
@@ -164,4 +166,6 @@ function moveItemDown(i) {
 
 function saveList() {
     localStorage.setItem("originalList", JSON.stringify(originalList));
+    localStorage.setItem("hideCompleted", hideCompleted.checked);
+    localStorage.setItem("showNumbers", showNumbers.checked);
 };
