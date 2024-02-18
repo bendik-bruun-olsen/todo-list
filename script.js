@@ -10,9 +10,8 @@ const generateID = () => Math.round(Math.random() * Date.now()).toString(16);
 hideCompleted.checked = localStorage.getItem("hideCompleted") === "true";
 showNumbers.checked = localStorage.getItem("showNumbers") === "true";
 
-
 let originalList = [];
-const storedList = localStorage.getItem("originalList")
+const storedList = localStorage.getItem("originalList");
 if (storedList) {
     originalList = JSON.parse(storedList);
     generateList(sortList());
@@ -30,7 +29,6 @@ inputForm.addEventListener("submit", (e) => {
         originalList.unshift(newItem);
         input.value = "";
         generateList(sortList());
-        saveList();
         input.focus();
     }
     else input.placeholder = "The Field of Input Yearns for Letters!";
@@ -38,7 +36,7 @@ inputForm.addEventListener("submit", (e) => {
 
 showNumbers.addEventListener("change", () => {
     generateList(sortList());
-})
+});
 
 hideCompleted.addEventListener("change", () => {
     generateList(sortList());
@@ -78,14 +76,12 @@ function generateList(arr) {
         btnRemove.addEventListener("click", () => {
             originalList.splice(i, 1);
             generateList(sortList());
-            saveList();
         });
     
         checkedIcon.addEventListener("click", () => {
             e.checked = !e.checked;
             handleCheck(item, e.checked);
             generateList(sortList());
-            saveList();
         });
 
         arrowUp.addEventListener("click", () => generateList(sortList(e.id, "moveUp")));
